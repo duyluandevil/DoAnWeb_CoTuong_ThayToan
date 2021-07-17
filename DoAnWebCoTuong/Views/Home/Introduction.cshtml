@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewBag.Title = "Introduction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- content text -->
+    <div class="introduction">
+        <div class="Gioithieu">
+            <h1>Giới thiệu cờ tướng</h1>
+            <p>
+                Cờ tướng (Tiếng Trung: 象棋), hay còn gọi là cờ Trung Hoa (Tiếng Trung: 中國象棋), là một trò chơi trí tuệ dành 
+                cho hai người. Đây là loại cờ phổ biến nhất tại các nước như Trung Quốc, Việt Nam, Đài Loan và Singapore và nằm
+                trong cùng một thể loại cờ với cờ vua, shogi, janggi. Trò chơi này mô phỏng cuộc chiến giữa hai quốc gia, với 
+                mục tiêu là bắt được Tướng của đối phương. Các đặc điểm khác biệt của cờ tướng so với các trò chơi cùng họ là: 
+                các quân đặt ở giao điểm các đường thay vì đặt vào ô, quân Pháo phải nhảy qua 1 quân khi ăn quân, các khái niệm 
+                sông và cung nhằm giới hạn các quân Tướng, Sĩ và Tượng.</p> 
+            <img src="~/Content/image/hinh1.jpg" />
+            <p>
+                Người Trung Hoa đặt tên cho cờ này là Tượng kỳ (象棋) với 
+                ý nghĩa cờ hình tượng (theo chữ Hán) chứ không phải vì có quân tượng (voi) trên bàn cờ. Cũng có một số tài liệu lý 
+                giải rằng, vì Trung Hoa trước thời nhà Nguyên (1271-1368)... thì không có voi, khi họ tiếp nhận Saturanga thấy trong 
+                các quan có quân voi lạ nên người Trung Hoa bèn gọi là "tượng kỳ" để kỷ niệm một loại cờ lạ có con voi. Như thế có 
+                người suy ra "tượng kỳ" có nghĩa là cờ voi. Trong tiếng Việt, từ trước tới nay trò chơi này được gọi là cờ tướng do 
+                trong bàn cờ quân Tướng là quan trọng nhất.</p>
+        </div>
+        <hr class="logo-brand" style="margin-top: 25px; border: 0; border-top: 1px solid #ff0000; width: 80%; margin-left: 10%;"/>
+        <div class="tieu-de">
+            <h2>Các bàn cờ từ xưa đến nay!</h2>
+        </div>
+        <div class="frame"></div>
+        <div class="slider-video">
+            <div class="slide1 active">
+                <img src="~/Content/image/co1.jpg" />
+            </div>
+            <div class="slide1">
+                <img src="~/Content/image/co2.jpg" />
+            </div>
+            <div class="slide1">
+                <img src="~/Content/image/co3.jpg" />
+            </div>
+            <div class="slide1">
+                <img src="~/Content/image/co4.jpg" />
+            </div>
+            <div class="navigation">
+                <i class="fas fa-chevron-left prev-btn" style="color: black;"></i>
+                <i class="fas fa-chevron-right next-btn"></i>
+            </div>
+            <div class="navigation-visibility">
+                <div class="slide-icon active"></div>
+                <div class="slide-icon"></div>
+                <div class="slide-icon"></div>
+                <div class="slide-icon"></div>
+                <div class="slide-icon"></div>
+            </div>
+        </div>
+        <hr class="gach-ngang" style="margin-top: -60px; border: 0; border-top: 1px solid #ff0000; width: 80%; margin-left: 10%;"/>
+        <div class="member" style="text-align: center; font-size: 34px; color: orange; margin-top: 15px; font-weight: bold;">Thành viên nhóm</div>
+        <div class="slide hi-slide">
+            <div class="hi-prev"></div>
+            <div class="hi-next"></div>
+            <ul>
+                <li>
+                    <img src="~/Content/image/khai.jpg" />
+                </li>
+                <li>
+                    <img src="~/Content/image/luan.jpg" />
+                </li>
+                <li>
+                    <img src="~/Content/image/luan2.jpg" />
+                </li>
+                <li>
+                    <img src="~/Content/image/tri.jpg" />
+                </li>
+                <li>
+                    <img src="~/Content/image/tuan.jpg" />
+                </li>
+                <li>
+                    <img src="~/Content/image/tu.jpg" />
+                </li>
+                <li>
+                    <img src="~/Content/image/quynh.jpg" />
+                </li>
+            </ul>
+        </div>
+        <!-- script start-->
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script type="text/javascript" src="~/Content/js/jquery.hislide.js"></script>
+        <script>
+            $('.slide').hiSlide();
+        </script>
+        <!-- script end-->
+        <div class="ghi-chu">
+            <h2>Hãy tận hưởng trò chơi và góp ý để đội ngũ làm game chúng tôi có thể phát triển game tốt hơn!</h2>
+        </div>
+        <div class="hinh-anh">
+            <img src="~/Content/image/logokyvuong.png" style="width: 17%; margin-left: 41%; margin-top: 10px;"/>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const slider = document.querySelector(".slider-video");
+        const nextBtn = document.querySelector(".next-btn");
+        const prevBtn = document.querySelector(".prev-btn");
+        const slides = document.querySelectorAll(".slide1");
+        const slideIcons = document.querySelectorAll(".slide-icon");
+        const numberOfSlides = slides.length;
+        var slideNumber = 0;
+
+        //image slider next button
+        nextBtn.addEventListener("click", () => {
+            slides.forEach((slide) => {
+                slide.classList.remove("active");
+            });
+            slideIcons.forEach((slideIcon) => {
+                slideIcon.classList.remove("active");
+            });
+
+            slideNumber++;
+
+            if (slideNumber > (numberOfSlides - 1)) {
+                slideNumber = 0;
+            }
+
+            slides[slideNumber].classList.add("active");
+            slideIcons[slideNumber].classList.add("active");
+        });
+
+        //image slider previous button
+        prevBtn.addEventListener("click", () => {
+            slides.forEach((slide) => {
+                slide.classList.remove("active");
+            });
+            slideIcons.forEach((slideIcon) => {
+                slideIcon.classList.remove("active");
+            });
+
+            slideNumber--;
+
+            if (slideNumber < 0) {
+                slideNumber = numberOfSlides - 1;
+            }
+
+            slides[slideNumber].classList.add("active");
+            slideIcons[slideNumber].classList.add("active");
+        });
+
+        //image slider autoplay
+        var playSlider;
+
+        var repeater = () => {
+            playSlider = setInterval(function () {
+                slides.forEach((slide) => {
+                    slide.classList.remove("active");
+                });
+                slideIcons.forEach((slideIcon) => {
+                    slideIcon.classList.remove("active");
+                });
+
+                slideNumber++;
+
+                if (slideNumber > (numberOfSlides - 1)) {
+                    slideNumber = 0;
+                }
+
+                slides[slideNumber].classList.add("active");
+                slideIcons[slideNumber].classList.add("active");
+            }, 4000);
+        }
+        repeater();
+
+        //stop the image slider autoplay on mouseover
+        slider.addEventListener("mouseover", () => {
+            clearInterval(playSlider);
+        });
+
+        //start the image slider autoplay again on mouseout
+        slider.addEventListener("mouseout", () => {
+            repeater();
+        });
+    </script>
+

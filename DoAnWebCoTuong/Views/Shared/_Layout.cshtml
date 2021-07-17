@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cờ Tướng GOD</title>
+    @*style css*@
+    <link href="~/Content/Style.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="~/Content/image/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <div class="wrapper">
+        <nav>
+            <ul>
+                <li><a href="@Url.Action("Index", "Home")">Trang Chủ</a></li>
+                <li><a href="@Url.Action("Introduction", "Home")">Giới Thiệu</a></li>
+                <li><a href="@Url.Action("Chessrule", "Home")">Cách Chơi</a></li>
+            </ul>
+        </nav>
+    </div>
+    @RenderBody()
+    <script>
+        /* dang nhap */
+        document.getElementById('buttonone').addEventListener('click',
+        function() {
+        document.querySelector('.bg-modal').style.display = 'flex';
+        });
+        document.querySelector('.close').addEventListener('click',
+        function() {
+        document.querySelector('.bg-modal').style.display = 'none';
+        });
+        /* dang ki */
+        document.getElementById('buttontwo').addEventListener('click',
+        function() {
+        document.querySelector('.bg-modal-dk').style.display = 'flex';
+        });
+        document.querySelector('.closedk').addEventListener('click',
+        function() {
+        document.querySelector('.bg-modal-dk').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

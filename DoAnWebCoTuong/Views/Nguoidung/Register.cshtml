@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text">
+    <h4> CHƠI GAME • GIẢI TRÍ • TẬN HƯỞNG</h4>
+    <img src="~/Content/image/cotung.png" />
+    <h3>TẬN HƯỞNG TRÒ CHƠI VÀ THỂ HIỆN KHẢ NĂNG CỦA BẠN</h3>
+    <button id="buttonone">ĐĂNG NHẬP</button>
+    <button id="buttontwo">ĐĂNG KÍ</button>
+    <button id="buttonthree" onclick="window.location.href='@Url.Action("Room", "Home")'">KHÁCH</button>
+</div>
+<div class="ads-azir">
+    <img src="~/Content/image/giaodien1.jpg" />
+    <img src="~/Content/image/Video.png" alt="" style="width: 22%; height: 30%;top: 232px; right: 55px;">
+    <img src="~/Content/image/khung2.png" alt="" style="width: 27%; top: 226px; left: 49px; height: 34%;">
+    <video controls>
+        <source src="~/Content/image/azirvideo_Trim.mp4">
+    </video>
+</div>
+<!-- Model Popup Login -->
+<div class="bg-modal">
+    <div class="modal-content">
+        <div class="close" style="font-weight: bold; color: white;">+</div>
+        <img src="~/Content/image/giacatluong.png" alt="">
+        @using (Html.BeginForm("login", "Nguoidung", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="text" name="username" placeholder="Tên đăng nhập">
+            <input type="password" name="password" placeholder="Mật khẩu" id="password">
+            <div id="toggle" onclick="showHide();"></div>
+            <script type="text/javascript">
+                        const password = document.getElementById('password');
+                        const toggle = document.getElementById('toggle');
+                        function showHide(){
+                            if(password.type === 'password'){
+                                password.setAttribute('type', 'text');
+                                toggle.classList.add('hide')
+                            }
+                            else{
+                                password.setAttribute('type', 'password');
+                                toggle.classList.remove('hide')
+                            }
+                        }
+            </script>
+            <button type="submit" id="buttondn">ĐĂNG NHẬP</button>
+        }
+    </div>
+</div>
+<!-- Model Popup Register -->
+<div class="bg-modal-dk">
+    <div class="modal-content-dk">
+        <div class="closedk" style="font-weight: bold; color: white;">+</div>
+        <img src="~/Content/image/Taothao.png" alt="">
+        @using (Html.BeginForm("Register", "Nguoidung", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @ViewData["Loi1"]
+            <input type="text" name="Hokhach" placeholder="Họ" />
+            <input type="text" name="Tenkhach" placeholder="Tên">
+            <input type="password" name="password" placeholder="Mật khẩu">
+            <input type="password" name="repassword" placeholder="Nhập lại mật khẩu">
+            <input type="text" name="sex" placeholder="Giới tính" />
+            <h4 style="color:white">Ngày sinh:</h4>
+            <input type="date" name="birthday" />
+            <input type="text" name="email" placeholder="Email" />
+            <button type="submit" id="buttondk">ĐĂNG KÍ</button>
+            <iframe name="iframe1" id="iframe1" src="~/Content/music/nhaccotuong.mp3" frameborder="0" border="0" cellspacing="0" style="border-style: none;width: 0; height: 0;"></iframe>
+        }
+    </div>
+</div>
+
