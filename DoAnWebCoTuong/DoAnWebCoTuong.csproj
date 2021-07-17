@@ -269,6 +269,7 @@
     <Content Include="Content\coduyluan\Banco.png" />
     <Content Include="Content\coduyluan\CanMove.png" />
     <Content Include="Content\coduyluan\CanMove1.png" />
+    <Content Include="Content\coduyluan\dot.png" />
     <Content Include="Content\coduyluan\Ma_den.PNG" />
     <Content Include="Content\coduyluan\Ma_do.png" />
     <Content Include="Content\coduyluan\Phao_den.png" />
@@ -317,6 +318,7 @@
     <Content Include="Content\image\Video.png" />
     <Content Include="Content\image\visibility.png" />
     <Content Include="Content\js\class.js" />
+    <Content Include="Content\js\DiChuyenQuanCo.js" />
     <Content Include="Content\js\jquery.hislide.js" />
     <Content Include="Content\js\TaiBanCo.js" />
     <Content Include="Content\music\nhaccotuong.mp3" />
