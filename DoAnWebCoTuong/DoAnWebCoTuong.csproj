@@ -316,7 +316,9 @@
     <Content Include="Content\image\tuan.jpg" />
     <Content Include="Content\image\Video.png" />
     <Content Include="Content\image\visibility.png" />
+    <Content Include="Content\js\class.js" />
     <Content Include="Content\js\jquery.hislide.js" />
+    <Content Include="Content\js\TaiBanCo.js" />
     <Content Include="Content\music\nhaccotuong.mp3" />
     <Content Include="Content\Style.css" />
     <Content Include="favicon.ico" />

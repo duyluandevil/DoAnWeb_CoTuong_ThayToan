@@ -572,7 +572,7 @@ input {
     top: 65%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3));
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6));
     width: 67%;
     padding: 50px 30px;
     border-radius: 10px;
@@ -639,13 +639,12 @@ input {
 
 .listRoom {
     height: 300px;
-    background-color: #17191e;  
     overflow: auto;
     text-align: center;
 }
 
 .table tr th {
-    color: white;
+    color: yellow;
     width: 350px;
     padding: 10px;
     border-bottom: 1px solid white;
