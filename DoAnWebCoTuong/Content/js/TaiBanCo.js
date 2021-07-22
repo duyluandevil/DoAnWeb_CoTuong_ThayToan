@@ -841,43 +841,83 @@ function TinhNuocDi(ten, loai, x, y) {
     } 
 
     if (loai == "Do" && (ten == "si_do1" || ten == "si_do2")) {
-
         if (y == 7) {
-            NuocDiHienTai.push(
-                new ViTri(x - 1, y + 1),
-            );
+            if (x == 5) {
+                NuocDiHienTai.push(
+                    new ViTri(x - 1, y + 1),
+
+                );
+            }
+            if (x == 3) {
+                NuocDiHienTai.push(
+                    new ViTri(x + 1, y + 1),
+
+                );
+            }
         }
-        if (y <= 9) {
+        if (y <= 9 && y != 7) {
             if (x == 5) {
                 NuocDiHienTai.push(
                     new ViTri(x - 1, y - 1),
+
                 );
             }
-            else if (x == 3) {
+
+            if (x == 3) {
                 NuocDiHienTai.push(
                     new ViTri(x + 1, y - 1),
+
                 );
             }
             else {
                 NuocDiHienTai.push(
-                    new ViTri(x + 1, y - 1),
-                    new ViTri(x - 1, y - 1),
                     new ViTri(x + 1, y + 1),
+                    new ViTri(x - 1, y - 1),
                     new ViTri(x - 1, y + 1),
+                    new ViTri(x + 1, y - 1),
                 );
             }
         }
         return NuocDiHienTai;
     }
 
-    if (loai == "Do" && (ten == "voi_do1" || ten == "voi_do2")) {
-        if (y <= 5) {
+     if (loai == "Do" && (ten == "voi_do1" || ten == "voi_do2")) {
+
+        if (y != 7 && y != 5) {
             NuocDiHienTai.push(
                 new ViTri(x - 2, y - 2),
                 new ViTri(x + 2, y - 2),
-                new ViTri(x - 2, y + 2),
-                new ViTri(x + 2, y + 2),
             );
+        }
+        if (y == 5) {
+            NuocDiHienTai.push(
+                new ViTri(x + 2, y + 2),
+                new ViTri(x - 2, y + 2),
+            );
+        }
+        if (y <= 9) {
+            if (x == 0) {
+                NuocDiHienTai.push(
+                    new ViTri(x + 2, y - 2),
+                    new ViTri(x + 2, y + 2),
+                );
+            }
+            if (x < 8 && y != 5) {
+                NuocDiHienTai.push(
+                    new ViTri(x - 2, y - 2),
+                    new ViTri(x + 2, y + 2),
+                    new ViTri(x - 2, y + 2),
+                    new ViTri(x + 2, y - 2),
+
+                );
+            }
+            if (x == 8) {
+                NuocDiHienTai.push(
+                    new ViTri(x - 2, y - 2),
+                    new ViTri(x - 2, y + 2),
+                );
+            }
+
         }
         return NuocDiHienTai;
     }
@@ -907,8 +947,668 @@ function TinhNuocDi(ten, loai, x, y) {
         }
 
         return NuocDiHienTai;
-
     } 
+
+    if (loai == "Den" && (ten == "tuong")) {
+        if (y != 2) {
+            NuocDiHienTai.push(
+                new ViTri(x, y + 1),
+            );
+        }
+        if (y >= 0) {
+            if (x == 5) {
+                NuocDiHienTai.push(
+                    new ViTri(x - 1, y),
+                    new ViTri(x, y - 1),
+                );
+            }
+            else if (x == 3) {
+                NuocDiHienTai.push(
+                    new ViTri(x + 1, y),
+                    new ViTri(x, y - 1),
+                );
+            }
+            else {
+                NuocDiHienTai.push(
+                    new ViTri(x + 1, y),
+                    new ViTri(x - 1, y),
+                    new ViTri(x, y - 1),
+                );
+            }
+        }
+        return NuocDiHienTai;
+    } 
+
+    if (loai == "Den" && (ten == "si_den1" || ten == "si_den2")) {
+        if (y == 2) {
+            if (x == 5) {
+                NuocDiHienTai.push(
+                    new ViTri(x - 1, y - 1),
+                );
+            }
+            if (x == 3) {
+                NuocDiHienTai.push(
+                    new ViTri(x + 1, y - 1),
+                );
+            }
+        }
+        if (y >= 0 && y != 2) {
+            if (x == 5) {
+                NuocDiHienTai.push(
+                    new ViTri(x - 1, y + 1),
+                );
+            }
+            if (x == 3) {
+                NuocDiHienTai.push(
+                    new ViTri(x + 1, y + 1),
+                );
+            }
+            else {
+                NuocDiHienTai.push(
+                    new ViTri(x + 1, y + 1),
+                    new ViTri(x - 1, y + 1),
+                    new ViTri(x - 1, y - 1),
+                    new ViTri(x + 1, y - 1),
+                );
+            }
+        }
+        return NuocDiHienTai;
+    }
+
+    if (loai == "Den" && (ten == "voi_den1" || ten == "voi_den2")) {
+        if (y != 2 && y != 4) {
+            NuocDiHienTai.push(
+                new ViTri(x - 2, y + 2),
+                new ViTri(x + 2, y + 2),
+            );
+        }
+        if (y == 4) {
+            NuocDiHienTai.push(
+                new ViTri(x + 2, y - 2),
+                new ViTri(x - 2, y - 2),
+            );
+        }
+        if (y >= 0) {
+            if (x == 0) {
+                NuocDiHienTai.push(
+                    new ViTri(x + 2, y - 2),
+                    new ViTri(x + 2, y + 2),
+                );
+            }
+            if (x < 8 && y != 4) {
+                NuocDiHienTai.push(
+                    new ViTri(x - 2, y - 2),
+                    new ViTri(x + 2, y + 2),
+                    new ViTri(x - 2, y + 2),
+                    new ViTri(x + 2, y - 2),
+                );
+            }
+            if (x == 8) {
+                NuocDiHienTai.push(
+                    new ViTri(x - 2, y - 2),
+                    new ViTri(x - 2, y + 2),
+                );
+            }
+        }
+        return NuocDiHienTai;
+    }
+
+    if (loai == "Den" && (ten == "ma_den1" || ten == "ma_den2")) {
+        if (x > 1 && x < 7 && y > 1 && y < 8) {
+            NuocDiHienTai.push(
+                //di len
+                new ViTri(x - 1, y - 2),
+                new ViTri(x + 1, y - 2),
+                //di xuong
+                new ViTri(x - 1, y + 2),
+                new ViTri(x + 1, y + 2),
+                //di trai
+                new ViTri(x - 2, y - 1),
+                new ViTri(x - 2, y + 1),
+                //di phai
+                new ViTri(x + 2, y - 1),
+                new ViTri(x + 2, y + 1),
+            );
+        } else {
+            //trai
+            if (x == 0) {
+                if (y == 0) {
+                    NuocDiHienTai.push(
+                        new ViTri(x + 2, y + 1),
+                        new ViTri(x + 1, y + 2),
+                    );
+                } else
+                    if (y == 1) {
+                        NuocDiHienTai.push(
+                            new ViTri(x + 2, y - 1),
+                            new ViTri(x + 2, y + 1),
+                            new ViTri(x + 1, y + 2),
+                        );
+                    } else
+                        if (y == 9) {
+                            NuocDiHienTai.push(
+                                new ViTri(x + 2, y - 1),
+                                new ViTri(x + 1, y - 2),
+                            );
+                        } else
+                            if (y == 8) {
+                                NuocDiHienTai.push(
+                                    new ViTri(x + 2, y - 1),
+                                    new ViTri(x + 2, y + 1),
+                                    new ViTri(x + 1, y - 2),
+                                );
+                            } else {
+                                NuocDiHienTai.push(
+                                    new ViTri(x + 1, y - 2),
+                                    new ViTri(x + 1, y + 2),
+                                    new ViTri(x + 2, y - 1),
+                                    new ViTri(x + 2, y + 1),
+                                );
+                            }
+            }
+
+            if (x == 1) {
+                if (y == 0) {
+                    NuocDiHienTai.push(
+                        new ViTri(x + 2, y + 1),
+                        new ViTri(x + 1, y + 2),
+                        new ViTri(x - 1, y + 2)
+                    );
+                } else
+                    if (y == 1) {
+                        NuocDiHienTai.push(
+                            new ViTri(x + 2, y - 1),
+                            new ViTri(x + 2, y + 1),
+                            new ViTri(x + 1, y + 2),
+                            new ViTri(x - 1, y + 2)
+                        );
+                    } else
+                        if (y == 9) {
+                            NuocDiHienTai.push(
+                                new ViTri(x + 2, y - 1),
+                                new ViTri(x + 1, y - 2),
+                                new ViTri(x - 1, y - 2)
+                            );
+                        } else
+                            if (y == 8) {
+                                NuocDiHienTai.push(
+                                    new ViTri(x + 2, y - 1),
+                                    new ViTri(x + 2, y + 1),
+                                    new ViTri(x + 1, y - 2),
+                                    new ViTri(x - 1, y - 2)
+
+                                );
+                            } else {
+                                NuocDiHienTai.push(
+                                    new ViTri(x + 1, y - 2),
+                                    new ViTri(x - 1, y - 2),
+                                    new ViTri(x + 1, y + 2),
+                                    new ViTri(x - 1, y + 2),
+                                    new ViTri(x + 2, y - 1),
+                                    new ViTri(x + 2, y + 1),
+                                );
+                            }
+            }
+            //phai
+            if (x == 8) {
+                if (y == 0) {
+                    NuocDiHienTai.push(
+                        new ViTri(x - 2, y + 1),
+                        new ViTri(x - 1, y + 2),
+                    );
+                } else
+                    if (y == 1) {
+                        NuocDiHienTai.push(
+                            new ViTri(x - 2, y - 1),
+                            new ViTri(x - 2, y + 1),
+                            new ViTri(x - 1, y + 2),
+                        );
+                    } else
+                        if (y == 9) {
+                            NuocDiHienTai.push(
+                                new ViTri(x - 2, y - 1),
+                                new ViTri(x - 1, y - 2),
+                            );
+                        } else
+                            if (y == 8) {
+                                NuocDiHienTai.push(
+                                    new ViTri(x - 2, y - 1),
+                                    new ViTri(x - 2, y + 1),
+                                    new ViTri(x - 1, y - 2),
+                                );
+                            } else {
+                                NuocDiHienTai.push(
+                                    new ViTri(x - 1, y - 2),
+                                    new ViTri(x - 1, y + 2),
+                                    new ViTri(x - 2, y - 1),
+                                    new ViTri(x - 2, y + 1),
+                                );
+                            }
+            }
+
+            if (x == 7) {
+                if (y == 0) {
+                    NuocDiHienTai.push(
+                        new ViTri(x - 2, y + 1),
+                        new ViTri(x + 1, y + 2),
+                        new ViTri(x - 1, y + 2)
+                    );
+                } else
+                    if (y == 1) {
+                        NuocDiHienTai.push(
+                            new ViTri(x - 2, y - 1),
+                            new ViTri(x - 2, y + 1),
+                            new ViTri(x + 1, y + 2),
+                            new ViTri(x - 1, y + 2)
+                        );
+                    } else
+                        if (y == 9) {
+                            NuocDiHienTai.push(
+                                new ViTri(x - 2, y - 1),
+                                new ViTri(x + 1, y - 2),
+                                new ViTri(x - 1, y - 2)
+                            );
+                        } else
+                            if (y == 8) {
+                                NuocDiHienTai.push(
+                                    new ViTri(x - 2, y - 1),
+                                    new ViTri(x - 2, y + 1),
+                                    new ViTri(x + 1, y - 2),
+                                    new ViTri(x - 1, y - 2)
+
+                                );
+                            } else {
+                                NuocDiHienTai.push(
+                                    new ViTri(x + 1, y - 2),
+                                    new ViTri(x - 1, y - 2),
+                                    new ViTri(x + 1, y + 2),
+                                    new ViTri(x - 1, y + 2),
+                                    new ViTri(x - 2, y - 1),
+                                    new ViTri(x - 2, y + 1),
+                                );
+                            }
+            }
+            //tren
+            if (y == 0) {
+                if (x == 0) {
+                    NuocDiHienTai.push(
+                        new ViTri(x + 2, y + 1),
+                        new ViTri(x + 1, y + 2),
+                    );
+                } else
+                    if (x == 1) {
+                        NuocDiHienTai.push(
+                            new ViTri(x + 2, y + 1),
+                            new ViTri(x - 1, y + 2),
+                            new ViTri(x + 1, y + 2),
+                        );
+                    } else
+                        if (x == 8) {
+                            NuocDiHienTai.push(
+                                new ViTri(x - 2, y + 1),
+                                new ViTri(x - 1, y + 2),
+                            );
+                        } else
+                            if (x == 7) {
+                                NuocDiHienTai.push(
+                                    new ViTri(x - 2, y + 1),
+                                    new ViTri(x - 1, y + 2),
+                                    new ViTri(x + 1, y + 2),
+                                );
+                            } else {
+                                NuocDiHienTai.push(
+                                    new ViTri(x + 1, y + 2),
+                                    new ViTri(x - 1, y + 2),
+                                    new ViTri(x + 2, y + 1),
+                                    new ViTri(x - 2, y + 1),
+                                );
+                            }
+            }
+
+            if (y == 1) {
+                if (x == 0) {
+                    NuocDiHienTai.push(
+                        new ViTri(x + 2, y + 1),
+                        new ViTri(x + 1, y + 2),
+                        new ViTri(x - 1, y + 2)
+                    );
+                } else
+                    if (x == 1) {
+                        NuocDiHienTai.push(
+                            new ViTri(x + 2, y - 1),
+                            new ViTri(x + 2, y + 1),
+                            new ViTri(x + 1, y + 2),
+                            new ViTri(x - 1, y + 2)
+                        );
+                    } else
+                        if (x == 8) {
+                            NuocDiHienTai.push(
+                                new ViTri(x - 2, y + 1),
+                                new ViTri(x - 1, y - 2),
+                                new ViTri(x - 1, y + 2)
+                            );
+                        } else
+                            if (x == 7) {
+                                NuocDiHienTai.push(
+                                    new ViTri(x - 2, y - 1),
+                                    new ViTri(x - 2, y + 1),
+                                    new ViTri(x + 1, y + 2),
+                                    new ViTri(x - 1, y + 2)
+
+                                );
+                            } else {
+                                NuocDiHienTai.push(
+                                    new ViTri(x - 2, y - 1),
+                                    new ViTri(x - 2, y + 1),
+                                    new ViTri(x + 1, y + 2),
+                                    new ViTri(x - 1, y + 2),
+                                    new ViTri(x + 2, y - 1),
+                                    new ViTri(x + 2, y + 1),
+                                );
+                            }
+            }
+            //duoi
+            if (y == 9) {
+                if (x == 0) {
+                    NuocDiHienTai.push(
+                        new ViTri(x + 2, y - 1),
+                        new ViTri(x + 1, y - 2),
+                    );
+                } else
+                    if (x == 1) {
+                        NuocDiHienTai.push(
+                            new ViTri(x + 2, y - 1),
+                            new ViTri(x + 1, y - 2),
+                            new ViTri(x - 1, y - 2),
+                        );
+                    } else
+                        if (x == 8) {
+                            NuocDiHienTai.push(
+                                new ViTri(x - 2, y - 1),
+                                new ViTri(x - 1, y - 2),
+                            );
+                        } else
+                            if (x == 7) {
+                                NuocDiHienTai.push(
+                                    new ViTri(x - 2, y - 1),
+                                    new ViTri(x - 1, y - 2),
+                                    new ViTri(x + 1, y - 2),
+                                );
+                            } else {
+                                NuocDiHienTai.push(
+                                    new ViTri(x + 1, y - 2),
+                                    new ViTri(x - 1, y - 2),
+                                    new ViTri(x + 2, y - 1),
+                                    new ViTri(x - 2, y - 1),
+                                );
+                            }
+            }
+
+            if (y == 8) {
+                if (x == 0) {
+                    NuocDiHienTai.push(
+                        new ViTri(x + 2, y - 1),
+                        new ViTri(x + 1, y - 2),
+                        new ViTri(x + 2, y + 1)
+                    );
+                } else
+                    if (x == 1) {
+                        NuocDiHienTai.push(
+                            new ViTri(x + 2, y - 1),
+                            new ViTri(x + 2, y + 1),
+                            new ViTri(x + 1, y - 2),
+                            new ViTri(x - 1, y - 2)
+                        );
+                    } else
+                        if (x == 8) {
+                            NuocDiHienTai.push(
+                                new ViTri(x - 2, y + 1),
+                                new ViTri(x - 1, y - 2),
+                                new ViTri(x - 2, y - 1)
+                            );
+                        } else
+                            if (x == 7) {
+                                NuocDiHienTai.push(
+                                    new ViTri(x - 2, y - 1),
+                                    new ViTri(x - 2, y + 1),
+                                    new ViTri(x + 1, y - 2),
+                                    new ViTri(x - 1, y - 2)
+
+                                );
+                            } else {
+                                NuocDiHienTai.push(
+                                    new ViTri(x - 2, y - 1),
+                                    new ViTri(x - 2, y + 1),
+                                    new ViTri(x + 1, y - 2),
+                                    new ViTri(x - 1, y - 2),
+                                    new ViTri(x + 2, y - 1),
+                                    new ViTri(x + 2, y + 1),
+                                );
+                            }
+            }
+        }
+        return NuocDiHienTai;
+    }
+
+    if (loai == "Den" && (ten == "phao_den1" || ten == "phao_den2")) {
+        //di len
+        if (y > 0) {
+            NuocDiHienTai.push(new ViTri(x, y - 1));
+            if (y > 1) {
+                NuocDiHienTai.push(new ViTri(x, y - 2));
+                if (y > 2) {
+                    NuocDiHienTai.push(new ViTri(x, y - 3));
+                    if (y > 3) {
+                        NuocDiHienTai.push(new ViTri(x, y - 4));
+                        if (y > 4) {
+                            NuocDiHienTai.push(new ViTri(x, y - 5));
+                            if (y > 5) {
+                                NuocDiHienTai.push(new ViTri(x, y - 6));
+                                if (y > 6) {
+                                    NuocDiHienTai.push(new ViTri(x, y - 7));
+                                    if (y > 7) {
+                                        NuocDiHienTai.push(new ViTri(x, y - 8));
+                                        if (y > 8) {
+                                            NuocDiHienTai.push(new ViTri(x, y - 9));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //di xuong
+        if (y < 9) {
+            NuocDiHienTai.push(new ViTri(x, y + 1));
+            if (y < 8) {
+                NuocDiHienTai.push(new ViTri(x, y + 2));
+                if (y < 7) {
+                    NuocDiHienTai.push(new ViTri(x, y + 3));
+                    if (y < 6) {
+                        NuocDiHienTai.push(new ViTri(x, y + 4));
+                        if (y < 5) {
+                            NuocDiHienTai.push(new ViTri(x, y + 5));
+                            if (y < 4) {
+                                NuocDiHienTai.push(new ViTri(x, y + 6));
+                                if (y < 3) {
+                                    NuocDiHienTai.push(new ViTri(x, y + 7));
+                                    if (y < 2) {
+                                        NuocDiHienTai.push(new ViTri(x, y + 8));
+                                        if (y < 1) {
+                                            NuocDiHienTai.push(new ViTri(x, y + 9));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //di trai
+        if (x > 0) {
+            NuocDiHienTai.push(new ViTri(x - 1, y));
+            if (x > 1) {
+                NuocDiHienTai.push(new ViTri(x - 2, y));
+                if (x > 2) {
+                    NuocDiHienTai.push(new ViTri(x - 3, y));
+                    if (x > 3) {
+                        NuocDiHienTai.push(new ViTri(x - 4, y));
+                        if (x > 4) {
+                            NuocDiHienTai.push(new ViTri(x - 5, y));
+                            if (x > 5) {
+                                NuocDiHienTai.push(new ViTri(x - 6, y));
+                                if (x > 6) {
+                                    NuocDiHienTai.push(new ViTri(x - 7, y));
+                                    if (x > 7) {
+                                        NuocDiHienTai.push(new ViTri(x - 8, y));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //di phai
+        if (x < 8) {
+            NuocDiHienTai.push(new ViTri(x + 1, y));
+            if (x < 7) {
+                NuocDiHienTai.push(new ViTri(x + 2, y));
+                if (x < 6) {
+                    NuocDiHienTai.push(new ViTri(x + 3, y));
+                    if (x < 5) {
+                        NuocDiHienTai.push(new ViTri(x + 4, y));
+                        if (x < 4) {
+                            NuocDiHienTai.push(new ViTri(x + 5, y));
+                            if (x < 3) {
+                                NuocDiHienTai.push(new ViTri(x + 6, y));
+                                if (x < 2) {
+                                    NuocDiHienTai.push(new ViTri(x + 7, y));
+                                    if (x < 1) {
+                                        NuocDiHienTai.push(new ViTri(x + 8, y));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return NuocDiHienTai;
+    }
+
+    if (loai == "Den" && (ten == "xe_den1" || ten == "xe_den2")) {
+        //di len
+        if (y > 0) {
+            NuocDiHienTai.push(new ViTri(x, y - 1));
+            if (y > 1) {
+                NuocDiHienTai.push(new ViTri(x, y - 2));
+                if (y > 2) {
+                    NuocDiHienTai.push(new ViTri(x, y - 3));
+                    if (y > 3) {
+                        NuocDiHienTai.push(new ViTri(x, y - 4));
+                        if (y > 4) {
+                            NuocDiHienTai.push(new ViTri(x, y - 5));
+                            if (y > 5) {
+                                NuocDiHienTai.push(new ViTri(x, y - 6));
+                                if (y > 6) {
+                                    NuocDiHienTai.push(new ViTri(x, y - 7));
+                                    if (y > 7) {
+                                        NuocDiHienTai.push(new ViTri(x, y - 8));
+                                        if (y > 8) {
+                                            NuocDiHienTai.push(new ViTri(x, y - 9));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //di xuong
+        if (y < 9) {
+            NuocDiHienTai.push(new ViTri(x, y + 1));
+            if (y < 8) {
+                NuocDiHienTai.push(new ViTri(x, y + 2));
+                if (y < 7) {
+                    NuocDiHienTai.push(new ViTri(x, y + 3));
+                    if (y < 6) {
+                        NuocDiHienTai.push(new ViTri(x, y + 4));
+                        if (y < 5) {
+                            NuocDiHienTai.push(new ViTri(x, y + 5));
+                            if (y < 4) {
+                                NuocDiHienTai.push(new ViTri(x, y + 6));
+                                if (y < 3) {
+                                    NuocDiHienTai.push(new ViTri(x, y + 7));
+                                    if (y < 2) {
+                                        NuocDiHienTai.push(new ViTri(x, y + 8));
+                                        if (y < 1) {
+                                            NuocDiHienTai.push(new ViTri(x, y + 9));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //di trai
+        if (x > 0) {
+            NuocDiHienTai.push(new ViTri(x - 1, y));
+            if (x > 1) {
+                NuocDiHienTai.push(new ViTri(x - 2, y));
+                if (x > 2) {
+                    NuocDiHienTai.push(new ViTri(x - 3, y));
+                    if (x > 3) {
+                        NuocDiHienTai.push(new ViTri(x - 4, y));
+                        if (x > 4) {
+                            NuocDiHienTai.push(new ViTri(x - 5, y));
+                            if (x > 5) {
+                                NuocDiHienTai.push(new ViTri(x - 6, y));
+                                if (x > 6) {
+                                    NuocDiHienTai.push(new ViTri(x - 7, y));
+                                    if (x > 7) {
+                                        NuocDiHienTai.push(new ViTri(x - 8, y));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //di phai
+        if (x < 8) {
+            NuocDiHienTai.push(new ViTri(x + 1, y));
+            if (x < 7) {
+                NuocDiHienTai.push(new ViTri(x + 2, y));
+                if (x < 6) {
+                    NuocDiHienTai.push(new ViTri(x + 3, y));
+                    if (x < 5) {
+                        NuocDiHienTai.push(new ViTri(x + 4, y));
+                        if (x < 4) {
+                            NuocDiHienTai.push(new ViTri(x + 5, y));
+                            if (x < 3) {
+                                NuocDiHienTai.push(new ViTri(x + 6, y));
+                                if (x < 2) {
+                                    NuocDiHienTai.push(new ViTri(x + 7, y));
+                                    if (x < 1) {
+                                        NuocDiHienTai.push(new ViTri(x + 8, y));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return NuocDiHienTai;
+    }
 }      
    
 
