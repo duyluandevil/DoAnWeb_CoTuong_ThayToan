@@ -1,4 +1,13 @@
-﻿class ViTri
+﻿class LoaiToanCuc {
+    constructor(loai, id, red, black) {
+    this.loai = loai;
+    this.id = id;
+    this.red = red;
+    this.black = black;
+    }
+}
+
+class ViTri
 {
     constructor(left, top)
     {
@@ -24,3 +33,9 @@ class ConCo {
     }
 }
 
+class QuayXe{
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+    }
+}

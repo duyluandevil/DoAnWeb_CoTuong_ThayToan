@@ -3,15 +3,191 @@
     ViewBag.Title = "ChessBoard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/Scripts/jquery.signalR-2.4.2.js"></script>
+<script src="~/signalr/Hubs"></script>
+<script src="~/Content/js/class.js"></script>
+<script src="~/Content/js/QuanCo.js"></script>
 
 <div class="image-chess" style="position: absolute; margin-left: 512px; width: 33%; margin-top: 82px;">
     <div class="test" style="width: 100%;">
         <img class="boxstrangle" src="~/Content/coduyluan/Banco.png" alt="">
+        <button id="LuuBanCo" onclick="ChapNhanLuu()" type="button">Lưu bàn cờ</button>
+        @*<input type="file" name="inputfile"
+               id="inputfile">
+        <br>*@
+
+        <input type="file" id="file-input" />
+        <button onclick="HienThiFileSave()" id="read-button">Read File</button>
+        <div>
+            Nước đi:
+            <pre id="file-contents">Nước đã đi</pre>
+        </div>
+
+        <button onclick="Undo()" style="position:absolute; left:100px;" id="read-button">Lùi </button>
     </div>
 </div>
-@*<div class="chatback">
-    <img src="~/Content/imageco/bg.jpg" style="position: absolute; height: 86%; margin-left: 62%; top: 22%; width: 17%; border-radius: 5px" />
-</div>*@
+<div class="box1" style="position: absolute; margin-left: 68%; top: 15%; background-color: white; width: 12%; height: 10%; border-radius: 5px;opacity:65%;color:orange">
+    <p id="RoomId" style="padding-left: 22%; margin-top: 24px; font-size: 25px; font-weight: bold;"></p>
+</div>
+<div class="box2" style=" position: absolute; margin-left: 19%; top: 15%; background-color: white; width: 12%; height: 10%; border-radius: 5px;opacity:65%;color:orange">
+    <p id="Do" style="padding-left: 35%; margin-top: 22px; font-size: 25px; font-weight: bold;"></p>
+</div>
+<div class="box3" style="position: absolute; margin-left: 19%; top: 68%; background-color: white; width: 12%; height: 10%; border-radius: 5px;opacity:65%;color:orange">
+    <p id="Den" style="padding-left: 35%; margin-top: 22px; font-size: 25px; font-weight: bold;"></p>
+</div>
+
+@* Pop up *@
+<div class="login-popup">
+    <div class="box">
+        <div class="img-area">
+            <div class="img">
+            </div>
+        </div>
+        <div class="form">
+            <div class="close">&times;</div>
+            <div class="content">
+                <div>
+                    <h3>Thông báo</h3><br>
+                    <h2>
+                        Bạn đã thắng
+                    </h2>
+                    <p>
+                       
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Pop up*@
+<style>
+    .login-popup {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1099;
+        background-color: rgba(0,0,0,0.6);
+        visibility: hidden;
+        opacity: 0;
+        transition: all 1s ease;
+    }
+
+        .login-popup.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .login-popup .box {
+            background-color: #ffffff;
+            width: 570px;
+            height: 322px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            display: flex;
+            flex-wrap: wrap;
+            opacity: 0;
+            margin-left: 50px;
+            transition: all 1s ease;
+            border-radius: 15px;
+        }
+
+        .login-popup.show .box {
+            opacity: 1;
+            margin-left: 0;
+        }
+
+        .login-popup .box .img-area {
+            flex: 0 0 50%;
+            max-width: 50%;
+            position: relative;
+            overflow: hidden;
+            padding: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .login-popup .box .img-area h1 {
+                font-size: 30px;
+            }
+
+            .login-popup .box .img-area .img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 91.6%;
+                background-image: url('../../Content/image/win.jpg');
+                background-size: cover;
+                background-position: center;
+                animation: zoomInOut 7s linear infinite;
+                z-index: -1;
+                border-top-left-radius: 15px;
+                border-bottom-left-radius: 15px;
+            }
+
+        .login-popup .box .form {
+            flex: 0 0 50%;
+            max-width: 48%;
+            padding: 98px 30px;
+        }
+
+            .login-popup .box .form .close {
+                position: absolute;
+                right: 10px;
+                top: 0px;
+                font-size: 30px;
+                cursor: pointer;
+            }
+
+    .box .content h3 {
+        color: #333;
+        line-height: 1em;
+        font-weight: bold;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .box .content h2 {
+        font-size: 30px;
+        color: #ff4d54;
+        font-weight: bold;
+        margin-left: 18px;
+    }
+
+    .box .content p {
+        text-align: center;
+    }
+</style>
+<script>
+    const loginPopup = document.querySelector(".login-popup");
+    const close = document.querySelector(".close");
+
+    function showPopup() {
+        const timeLimit = 1 // seconds;
+        let i = 0;
+        const timer = setInterval(function () {
+            i++;
+            if (i == timeLimit) {
+                clearInterval(timer);
+                loginPopup.classList.add("show");
+            }
+            console.log(i)
+        },300);
+    }
+    close.addEventListener("click", function () {
+        loginPopup.classList.remove("show");
+    })
+</script>
+
+<iframe src="https://www6.cbox.ws/box/?boxid=866659&boxtag=Jrkbzt" width="200" height="350" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" style=" margin-left: 1045px; margin-top: 290px;"></iframe>
+
 

@@ -4,30 +4,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<button class="snip1582" onclick="window.location.href='@Url.Action("ChessBoard", "Home")'">Tạo Bàn Mới</button>
-<button class="snip1582">Các Bàn Chơi</button>
-<img src="~/Content/image/DANHSACHPHONG.png" alt="" style="position:absolute;width: 42%;margin-left: 428px;top: 10%;">
+<button class="snip1582" id="newroom">Tạo Bàn Mới</button>
+<button class="snip1582" onclick="window.location.href='@Url.Action("PVE", "Home")'">Tào Tháo Máy</button>
+<img src="~/Content/image/DANHSACHPHONG.png" alt="" style="position:absolute;width: 42%;margin-left: 342px;top: 10%;">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <div class="form-container">
     <!-- phần list danh sách phòng -->
     <div class="listRoom">
         <table class="table">
             <tr>
-                <th scope="col">STT</th>
-                <th scope="col">Mã Phòng</th>
-                <th scope="col">Tên Phòng</th>
-                <th scope="col">Trạng Thái</th>
-                @*<th scope="col">Join</th>*@
+                <th scope="col" style="text-align:center">STT</th>
+                <th scope="col" style="text-align:center">Mã Phòng</th>
+                <th scope="col" style="text-align:center">Tên Phòng</th>
+                <th scope="col" style="text-align:center">Trạng Thái</th>
+                <th scope="col" style="text-align:center">SL Người Chơi</th>
+                <th scope="col" style="text-align:center">Vào Phòng</th>
             </tr>
         </table>
     </div>
-</div>
 
+</div>
 
 <script>
     $(document).ready(function () {
-            $('.table tr td').remove();
+        $('.table tr td').remove();
             $.ajax({
                 type: "GET",
                 dataType: "json",
@@ -35,15 +37,63 @@
                 /*data: source,*/
                 success: function (data) {
                     $(data.roomList).each(function (index, element) {
-                        $('.table').append("<tr><td>" + index + "</td><td>" + element.MAPHONG + "</td><td>" + element.TENPHONG + "</td>" + "</td><td>" + element.TRANGTHAI + "</td>");
+                        var flag = "Đầy";
+                        if (element.SLNGUOICHOI != 2) {
+                            flag = "Sẵn sàng";
+                        }
+                        $('.table').append("<tr><td>" + index + "</td><td>" + element.MAPHONG + "</td><td>" + element.TENPHONG + "</td>" + "</td>" +
+
+                            "<td>" + flag + "</td>"+
+                            "<td>" + element.SLNGUOICHOI + "</td > <td><button class='btn btn-success' onclick='join(" + '"' + element.MAPHONG + '"' + ")' value=" + element.MAPHONG + ">Vào</button></td > ");
                     })
+                    console.log(data);
                 },
                 error: function (error) {
                     jsonValue = jQuery.parseJSON(error.responseText);
                     alert("error" + error.responseText);
                 }
             });
+        $("#newroom").click(function () {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../api/TaoPhong",
+                success: function (data) {
+                    @*window.location.href('@Url.Action("ChessBoard", "Home")?id=' + data);*@
+                    var url = '@Url.Action("ChessBoard", "Home")?Id=' + data;
+                    window.location.href = url;
+                },
+                error: function (error) {
+                    jsonValue = jQuery.parseJSON(error.responseText);
+                    alert("error" + error.responseText);
+                }
+            });
+        })
     })
+</script>
+<script>
+        function join(Id) {
+            $.ajax({
+                type: "GET",
+                /*dataType: "json",*/
+                url: "../api/CheckRoom",
+                data: { 'Id': Id },
+                success: function (data) {
+                    if (data.RoomID != "Null") {
+                        console.log("Mã phòng là: " + data.RoomID);
+                        var url = '@Url.Action("ChessBoard", "Home")?Id=' + data.RoomID;
+                        window.location.href = url;
+                    }
+                    else {
+                        alert("Phòng không tồn tại hoặc đã đủ người chơi")
+                    }
+                },
+                error: function (error) {
+                    jsonValue = jQuery.parseJSON(error.responseText);
+                    alert("error" + error.responseText);
+                }
+            });
+        }
 </script>
 
 

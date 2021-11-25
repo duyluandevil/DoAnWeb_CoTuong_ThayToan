@@ -8,7 +8,7 @@ namespace DoAnWebCoTuong.Controllers
     public class NguoidungController : Controller
     {
         // GET: Nguoidung
-        dbChessContextDataContext db = new dbChessContextDataContext();
+        dbChessContext db = new dbChessContext();
         [HttpGet]
         public ActionResult login()
         {
@@ -86,7 +86,7 @@ namespace DoAnWebCoTuong.Controllers
             {
                 string min = DateTime.Now.ToString("mm");
                 string sec = DateTime.Now.ToString("ss");
-                string MaTaiKhoan = "K" + "" + min + "" + sec;
+                string MaTaiKhoan = "T" + "" + min + "" + sec;
                 kh.IDTAIKHOAN = MaTaiKhoan;
                 kh.HO = ho;
                 kh.TEN = ten;
@@ -94,8 +94,8 @@ namespace DoAnWebCoTuong.Controllers
                 kh.GIOITINH = gioitinh;
                 kh.NGAYSINH = DateTime.Parse(ngaysinh);
                 kh.EMAIL = email;
-                db.TAIKHOANs.InsertOnSubmit(kh);
-                db.SubmitChanges();
+                db.TAIKHOANs.Add(kh);
+                db.SaveChanges();
                 return RedirectToAction("login");
             }
             return this.Register();

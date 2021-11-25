@@ -19,15 +19,18 @@ namespace DoAnWebCoTuong.Controllers
             return View();
         }
 
-        public ActionResult Room()
+        public ActionResult Room(string id)
         {
-            return View();
+            return View(id);
         }
 
         public ActionResult ChessBoard()
         {
             return View();
         }
-
+        public ActionResult PVE()
+        {
+            return View();
+        }
     }
 }

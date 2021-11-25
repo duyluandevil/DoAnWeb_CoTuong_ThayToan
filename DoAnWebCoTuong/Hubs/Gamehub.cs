@@ -22,9 +22,9 @@ namespace DoAnWebCoTuong.Hubs
         {
             Clients.OthersInGroup(room).getmove(clquanco, xn, yn);
         }
-
-
-
-
+        public void sendmoveMaTran(string room, string clquanco, string yn, string xn, string y, string x, string change, string id)
+        {
+            Clients.OthersInGroup(room).getmoveMaTran(clquanco, yn, xn, y, x, change, id);
+        }
     }
 }

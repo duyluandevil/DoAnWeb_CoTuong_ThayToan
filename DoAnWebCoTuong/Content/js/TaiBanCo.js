@@ -5,22 +5,22 @@ var group = prompt("groups", "");//api ten phong
 
 $(document).ready(function () {
     HienQuanCo();
-    console.log(hubcontext)
-   
-    $.connection.hub.start().done(function () {
-            hubcontext.server.joinroom(group, name);
-    });
+    //console.log(hubcontext)
 
-    // thong bao join room
-    hubcontext.client.addchatmessage = function (msg) {
-        console.log(msg)
-        // load api diu lieu phong
-    } 
+    //$.connection.hub.start().done(function () {
+    //        hubcontext.server.joinroom(group, name);
+    //});
 
-    hubcontext.client.getmove = function (clquanco, xn, yn) {
-        $('.' + clquanco + '').css({ "top": yn + 'px', "position": 'absolute' });
-        $('.' + clquanco + '').css({ "left": xn + 'px', "position": 'absolute' });
-    }
+    //// thong bao join room
+    //hubcontext.client.addchatmessage = function (msg) {
+    //    console.log(msg)
+    //    // load api diu lieu phong
+    //} 
+
+    //hubcontext.client.getmove = function (clquanco, xn, yn) {
+    //    $('.' + clquanco + '').css({ "top": yn + 'px', "position": 'absolute' });
+    //    $('.' + clquanco + '').css({ "left": xn + 'px', "position": 'absolute' });
+    //}
 
 });
 
@@ -106,7 +106,7 @@ function HienQuanCo() {
         var p = mang[i].vitri;
         $(".test").append('<img src="' + mang[i].hinh + '" class="' + mang[i].id + ' ' + mang[i].loai + '"  alt="" style="position: absolute; left: ' + p.left + 'px; top: ' + p.top + 'px">');
         Click(mang[i].id, i);
-        
+
     }
     TaoMaTran();
 }
@@ -152,14 +152,19 @@ function Click(id, i) {
         //alert(MaTran[y][x].left)
         var NuocDi = new Array();
         NuocDi = TinhNuocDi(id, loai, x, y);
-        
+        //for (let metqua = 0; metqua < NuocDi.length; metqua++) {
+        //    if (MaTran[NuocDi[metqua].top][NuocDi[metqua].left]) {
+
+        //    }
+        //}
+
         //NuocDi.forEach(e => {
         //    $(".test").append('<img id="dot" class="dropimage" src="/Content/coduyluan/dot.png" style="position: absolute; margin-left:8px; margin-top: 6px;left: ' + MaTran[e.top][e.left].left + 'px; top: ' + MaTran[e.top][e.left].top + 'px"/>');
         //    //ClickDiChuyen(x, y);
         //    alert(e.top +"  "+ e.left);
         //    ClickDiChuyen(e.left, e.top);
 
-        
+
         //});
         //$("#dot").clearQueue();
         for (let metqua = 0; metqua < NuocDiQuanCu; metqua++) {
@@ -168,21 +173,128 @@ function Click(id, i) {
         }
 
         for (let metqua = 0; metqua < NuocDi.length; metqua++) {
-            
+
             $(".test").append('<img id="dot" class="dropimage' + metqua + '" src="/Content/coduyluan/dot.png" style="position: absolute; margin-left:8px; margin-top: 6px;left: ' + MaTran[NuocDi[metqua].top][NuocDi[metqua].left].left + 'px; top: ' + MaTran[NuocDi[metqua].top][NuocDi[metqua].left].top + 'px"/>');
             $('.dropimage' + metqua + '').click(function () {
                 ClickDiChuyen(NuocDi[metqua].left, NuocDi[metqua].top, metqua, NuocDi.length);
                 //alert("cc");
-                
+
             });
             NuocDiQuanCu = NuocDi.length;
-            
+
         }
         //for (let a = 0; a <= e.length; a++) {
 
-            //}
+        //}
         //ClickDiChuyen(x, y-1);
-        
+
+
+    });
+}
+
+
+
+
+function ClickDiChuyen(x, y, mq, DoDai) {
+    $('.dropimage' + mq + '').click(function () {
+
+        //alert("Ngu dốt");
+        //alert(ConCoHienTai);
+
+        //var ten = $(".dropimage").;
+        /* console.log(ten);*/ //split chia cai chuoi thanh cac phan bang dau cach
+        let left = $('.dropimage' + mq + '').css("left").slice(0, 3);
+        let top = $('.dropimage' + mq + '').css("top").slice(0, 3);
+
+
+
+
+        //Lấy thông tin của top có phải là số hay không
+        let t = top.slice(0, 1);
+        let o = top.slice(1, 2);
+        let p = top.slice(2, 3);
+
+        let topOff;
+        if (o >= '0' && o <= '9') {
+            topOff = t + o;
+            if (p >= '0' && p <= '9')
+                topOff = topOff + p;
+            else
+                topOff = topOff;
+        }
+        else
+            topOff = t;
+
+
+        //Lấy thông tin của left có phải là số hay không
+        let l = left.slice(0, 1);
+        let e = left.slice(1, 2);
+        let ft = left.slice(2, 3);
+
+        let leftOff;
+        if (e >= '0' && e <= '9') {
+            leftOff = l + e;
+            if (ft >= '0' && ft <= '9')
+                leftOff = leftOff + ft;
+            else
+                leftOff = leftOff;
+        }
+        else
+            leftOff = l;
+        //alert(topOff);
+
+
+
+        //var quanco;
+        //Xóa con cờ ở điểm cũ
+        for (let i = 0; i <= 9; i++) {
+            for (let j = 0; j <= 8; j++) {
+                if (MaTran[i][j].id == ConCoHienTai) {
+                    MaTran[i][j].id = "";
+                }
+            }
+        }
+
+        //MaTran[y][x].id = ConCoHienTai;
+
+
+
+        //hubcontext.server.sendmove(group, ConCoHienTai, leftOff, topOff)
+        // xoa thi them 1 tham so la class cua quan co bi xoa
+
+
+        $('.' + ConCoHienTai + '').css({ "top": topOff + 'px', "position": 'absolute' });
+        $('.' + ConCoHienTai + '').css({ "left": leftOff + 'px', "position": 'absolute' });
+
+        //Xóa nút di chuyển khi con cờ đã ở tại vị trí nút
+        for (let stt = 0; stt < DoDai; stt++) {
+            $('.dropimage' + stt + '').remove();
+        }
+
+        //Ăn cờ [Chưa test được cờ cùng loại có ăn hay chưa, lỗi chỗ con tướng, khi trùng vị trí đó thì con tướng luôn con tướng nằm trên]
+        if (MaTran[y][x].id != "") {
+            for (let i = 0; i < mang.length; i++) {
+                if (MaTran[y][x].id == mang[i].id) {
+                    if (LoaiConCo != mang[i].loai) {
+                        $('.' + mang[i].id + '').remove();
+                        MaTran[y][x].id = ConCoHienTai;
+                    }
+                    else {
+
+                    }
+                }
+
+            }
+        } else MaTran[y][x].id = ConCoHienTai;
+
+        //else {
+        //    MaTran[y][x].id = ConCoHienTai;
+        //}
+
+        //alert(x + " " + y);
+        //MaTran[y][x].id = ConCoHienTai;
+        //alert(MaTran[xCo][yCo].id);
+
 
     });
 }
@@ -191,33 +303,105 @@ function TinhNuocDi(ten, loai, x, y) {
 
     var NuocDiDuoc = new Array();
     var NuocDiHienTai = new Array();
-
-    
-    // co do
-    if (loai == "Do" && (ten == "tot_do1" || ten == "tot_do2"
-        || ten == "tot_do3" || ten == "tot_do4" || ten == "tot_do5")) {
+    var v1 = -1, v2 = -1, v3 = -1; v4 = -1;
+    for (let a = 0; a < mang.length; a++) {
         if (y != 0) {
-            NuocDiHienTai.push(
-                new ViTri(x, y - 1)
-            );
-        }
-        if (y <= 4) {
-            if (x == 8) {
-                NuocDiHienTai.push(
-                    new ViTri(x - 1, y),
-                );
-            }
-            else {
-                NuocDiHienTai.push(
-                    new ViTri(x + 1, y),
-                    new ViTri(x - 1, y),
-                );
+            if (MaTran[y - 1][x].id == mang[a].id) {
+                v1 = a;
             }
         }
-       
-        return NuocDiHienTai;
-        
-    } 
+        if (x != 0) {
+            if (MaTran[y][x - 1].id == mang[a].id) {
+                v2 = a;
+            }
+        }
+        if (x != 8) {
+            if (MaTran[y][x + 1].id == mang[a].id) {
+                v3 = a;
+            }
+        }
+        if (y != 9) {
+            if (MaTran[y + 1][x].id == mang[a].id) {
+                v4 = a;
+            }
+        }
+    }
+    // co do
+    //if (loai == "Do" && (ten == "tot_do1" || ten == "tot_do2"
+    //    || ten == "tot_do3" || ten == "tot_do4" || ten == "tot_do5")) {
+    //    if (y != 0) {
+    //        if (v1 != -1) {
+    //            if ((mang[v1].loai != "Do")) {
+    //                NuocDiHienTai.push(
+    //                    new ViTri(x, y - 1)
+    //                );
+    //            }
+    //        } else {
+    //            NuocDiHienTai.push(
+    //                new ViTri(x, y - 1)
+    //            );
+    //        }
+    //    }
+
+    //    if (y <= 4) {           
+    //        if (v2 != -1) {
+    //            if ((mang[v2].loai != "Do")) {
+    //                NuocDiHienTai.push(
+    //                    new ViTri(x-1, y)
+    //                );
+    //            }
+    //        } else {
+    //            if (x !=0) {
+    //                NuocDiHienTai.push(
+    //                    new ViTri(x - 1, y)
+    //                );
+    //            }
+
+    //        }
+    //        if (v3 != -1) {
+    //            if ((mang[v3].loai != "Do")) {
+    //                NuocDiHienTai.push(
+    //                    new ViTri(x + 1, y)
+    //                );
+    //            }
+    //        } else {
+    //            if (x != 8) {
+    //                NuocDiHienTai.push(
+    //                    new ViTri(x + 1, y)
+    //                );
+    //            }
+
+    //        }
+    //    }
+    //    //if (x != 0) {
+    //    //    if (v2 != -1) {
+    //    //        if ((mang[v2].loai != "Do")) {
+    //    //            NuocDiHienTai.push(
+    //    //                new ViTri(x - 1, y)
+    //    //            );
+    //    //        }
+    //    //    } else {
+    //    //        NuocDiHienTai.push(
+    //    //            new ViTri(x - 1, y)
+    //    //        );
+    //    //    }
+    //    //    if (v3 != -1) {
+    //    //        if ((mang[v3].loai != "Do")) {
+    //    //            NuocDiHienTai.push(
+    //    //                new ViTri(x + 1, y)
+    //    //            );
+    //    //        }
+    //    //    } else {
+    //    //        NuocDiHienTai.push(
+    //    //            new ViTri(x + 1, y)
+    //    //        );
+    //    //    }
+    //    //}
+
+
+    //    return NuocDiHienTai;
+
+    //}
 
     if (loai == "Do" && (ten == "xe_do1" || ten == "xe_do2")) {
         //di len
@@ -347,7 +531,7 @@ function TinhNuocDi(ten, loai, x, y) {
             );
         } else {
             //trai
-            if (x==0) {
+            if (x == 0) {
                 if (y == 0) {
                     NuocDiHienTai.push(
                         new ViTri(x + 2, y + 1),
@@ -382,7 +566,7 @@ function TinhNuocDi(ten, loai, x, y) {
                                 );
                             }
             }
-            
+
             if (x == 1) {
                 if (y == 0) {
                     NuocDiHienTai.push(
@@ -662,7 +846,7 @@ function TinhNuocDi(ten, loai, x, y) {
                                 );
                             }
             }
-        }       
+        }
         return NuocDiHienTai;
 
     }
@@ -778,13 +962,13 @@ function TinhNuocDi(ten, loai, x, y) {
     }
 
     if (loai == "Do" && (ten == "tuong_do")) {
-        if (y != 7 ) {
+        if (y != 7) {
             NuocDiHienTai.push(
                 new ViTri(x, y - 1),
             );
         }
         if (y <= 9) {
-            if (x == 5 ) {
+            if (x == 5) {
                 NuocDiHienTai.push(
                     new ViTri(x - 1, y),
                     new ViTri(x, y + 1),
@@ -805,7 +989,7 @@ function TinhNuocDi(ten, loai, x, y) {
             }
         }
         return NuocDiHienTai;
-    } 
+    }
 
     if (loai == "Do" && (ten == "si_do1" || ten == "si_do2")) {
         if (y == 7) {
@@ -848,7 +1032,7 @@ function TinhNuocDi(ten, loai, x, y) {
         return NuocDiHienTai;
     }
 
-     if (loai == "Do" && (ten == "voi_do1" || ten == "voi_do2")) {
+    if (loai == "Do" && (ten == "voi_do1" || ten == "voi_do2")) {
 
         if (y != 7 && y != 5) {
             NuocDiHienTai.push(
@@ -914,7 +1098,7 @@ function TinhNuocDi(ten, loai, x, y) {
         }
 
         return NuocDiHienTai;
-    } 
+    }
 
     if (loai == "Den" && (ten == "tuong")) {
         if (y != 2) {
@@ -944,7 +1128,7 @@ function TinhNuocDi(ten, loai, x, y) {
             }
         }
         return NuocDiHienTai;
-    } 
+    }
 
     if (loai == "Den" && (ten == "si_den1" || ten == "si_den2")) {
         if (y == 2) {
@@ -1576,110 +1760,4 @@ function TinhNuocDi(ten, loai, x, y) {
         }
         return NuocDiHienTai;
     }
-}      
-   
-
-function ClickDiChuyen(x,y, mq, DoDai) {
-    $('.dropimage'+ mq + '').click(function () {
-        
-        //alert("Ngu dốt");
-        //alert(ConCoHienTai);
-  
-        //var ten = $(".dropimage").;
-        /* console.log(ten);*/ //split chia cai chuoi thanh cac phan bang dau cach
-        let left = $('.dropimage' + mq + '').css("left").slice(0, 3);
-        let top = $('.dropimage' + mq + '').css("top").slice(0, 3);
-
-
-       
-
-        //Lấy thông tin của top có phải là số hay không
-        let t = top.slice(0, 1);
-        let o = top.slice(1, 2);
-        let p = top.slice(2, 3);
-
-        let topOff;
-        if (o >= '0' && o <= '9') {
-            topOff = t + o;
-            if (p >= '0' && p <= '9')
-                topOff = topOff + p;
-            else
-                topOff = topOff;
-        }
-        else
-            topOff = t;
-
-
-        //Lấy thông tin của left có phải là số hay không
-        let l = left.slice(0, 1);
-        let e = left.slice(1, 2);
-        let ft = left.slice(2, 3);
-
-        let leftOff;
-        if (e >= '0' && e <= '9') {
-            leftOff = l + e;
-            if (ft >= '0' && ft <= '9')
-                leftOff = leftOff + ft;
-            else
-                leftOff = leftOff;
-        }
-        else
-            leftOff = l;
-        //alert(topOff);
-
-
-
-        //var quanco;
-        //Xóa con cờ ở điểm cũ
-        for (let i = 0; i <= 9; i++) {
-            for (let j = 0; j <= 8; j++) {
-                if (MaTran[i][j].id == ConCoHienTai) {
-                    MaTran[i][j].id = "";
-                }
-            }
-        }
-
-        //MaTran[y][x].id = ConCoHienTai;
-
-
-        
-        hubcontext.server.sendmove(group, ConCoHienTai, leftOff, topOff)
-        // xoa thi them 1 tham so la class cua quan co bi xoa
-        
-
-        $('.' + ConCoHienTai + '').css({ "top": topOff + 'px', "position": 'absolute' });
-        $('.' + ConCoHienTai + '').css({ "left": leftOff + 'px', "position": 'absolute' });
-
-        //Xóa nút di chuyển khi con cờ đã ở tại vị trí nút
-        for (let stt = 0; stt < DoDai; stt++) {
-            $('.dropimage' + stt + '').remove();
-        }
-        
-        //Ăn cờ [Chưa test được cờ cùng loại có ăn hay chưa, lỗi chỗ con tướng, khi trùng vị trí đó thì con tướng luôn con tướng nằm trên]
-        if (MaTran[y][x].id != "") {
-            for (let i = 0; i < mang.length; i++) {
-                if (MaTran[y][x].id == mang[i].id) {
-                    if (LoaiConCo != mang[i].loai) {
-                        $('.' + mang[i].id + '').remove();
-                        MaTran[y][x].id = ConCoHienTai;
-                    }
-                    else {
-
-                    }
-                }
-
-            }
-        } else MaTran[y][x].id = ConCoHienTai;
-
-        //else {
-        //    MaTran[y][x].id = ConCoHienTai;
-        //}
-
-        //alert(x + " " + y);
-        //MaTran[y][x].id = ConCoHienTai;
-        //alert(MaTran[xCo][yCo].id);
-        
-
-    });
-}
-
+}  
